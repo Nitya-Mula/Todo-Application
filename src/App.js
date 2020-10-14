@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {BrowserRouter as Router, Route} from 'react-router-dom';
-import axios from 'axios';
+// import axios from 'axios';
 import './App.css';
 import Todos from './components/Todos';
 import Header from './components/layout/Header';
@@ -13,33 +13,33 @@ import { v4 as uuidv4 } from 'uuid';
 class App extends Component {
   
   state = {
-    // todos:[
-      // {
-      //   id: uuidv4(),
-      //   title: 'Take out the trash',
-      //   completed: false
-      // },{
-      //   id: uuidv4(),
-      //   title: 'Complete assignment',
-      //   completed: false
-      // },{
-      //   id: uuidv4(),
-      //   title: 'Make dinner',
-      //   completed: false
-      // },{
-      //   id: uuidv4(),
-      //   title: 'Room cleaning',
-      //   completed: false
-      // }
-    // ]
-    todos:[]
+    todos:[
+      {
+        id: uuidv4(),
+        title: 'Take out the trash',
+        completed: false
+      },{
+        id: uuidv4(),
+        title: 'Complete assignment',
+        completed: false
+      },{
+        id: uuidv4(),
+        title: 'Make dinner',
+        completed: false
+      },{
+        id: uuidv4(),
+        title: 'Room cleaning',
+        completed: false
+      }
+    ]
+    // todos:[]
   }
 
   //get from dummy response
-componentDidMount(){
-  axios.get('http://jsonplaceholder.typicode.com/todos?_limit=10')
-  .then(res => this.setState({todos : res.data}))
-}
+// componentDidMount(){
+//   axios.get('http://jsonplaceholder.typicode.com/todos?_limit=10')
+//   .then(res => this.setState({todos : res.data}))
+// }
 
   //Toggle Complete
   markComplete = (id) => {
@@ -56,16 +56,16 @@ componentDidMount(){
   //Delete Todo
   delTodo = (id) => {
 
-    axios.delete(`http://jsonplaceholder.typicode.com/todos/${id}`)
-    .then(res => this.setState({todos: [...this.state.todos.filter(todo => todo.id !== id)]}));
-    // this.setState({
-    //   todos: this.state.todos.filter((todo) => {
-    //     return todo.id !== id;
-    //   })
+    // axios.delete(`http://jsonplaceholder.typicode.com/todos/${id}`)
+    // .then(res => this.setState({todos: [...this.state.todos.filter(todo => todo.id !== id)]}));
+    this.setState({
+      todos: this.state.todos.filter((todo) => {
+        return todo.id !== id;
+      })
 
-    //   // todos: [...this.state.todos.filter(todo => todo.id !== id)]
+      // todos: [...this.state.todos.filter(todo => todo.id !== id)]
       
-    // });
+    });
   }
 
   //Add Todo
@@ -76,17 +76,17 @@ componentDidMount(){
       completed: false
     }
 
-    axios.post('http://jsonplaceholder.typicode.com/todos',newTodo)
-    .then(res => this.setState({
+    // axios.post('http://jsonplaceholder.typicode.com/todos',newTodo)
+    // .then(res => this.setState({
 
       
-      todos: [...this.state.todos, newTodo]
-      // todos: this.state.todos.push(newTodo)
-    }));
-    // this.setState({
     //   todos: [...this.state.todos, newTodo]
     //   // todos: this.state.todos.push(newTodo)
-    // });
+    // }));
+    this.setState({
+      todos: [...this.state.todos, newTodo]
+      // todos: this.state.todos.push(newTodo)
+    });
   }
 
   render(){
