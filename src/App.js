@@ -70,17 +70,17 @@ componentDidMount(){
 
   //Add Todo
   addTodo = (title) => {
-    // const newTodo = {
-    //   id: uuidv4(),
-    //   title: title,
-    //   completed: false
-    // }
-    axios.post('http://jsonplaceholder.typicode.com/todos',{
-      title,
+    const newTodo = {
+      id: uuidv4(),
+      title: title,
       completed: false
-    })
+    }
+
+    axios.post('http://jsonplaceholder.typicode.com/todos',newTodo)
     .then(res => this.setState({
-      todos: [...this.state.todos, res.data]
+
+      
+      todos: [...this.state.todos, newTodo]
       // todos: this.state.todos.push(newTodo)
     }));
     // this.setState({
